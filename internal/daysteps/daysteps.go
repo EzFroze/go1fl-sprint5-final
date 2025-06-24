@@ -3,11 +3,12 @@ package daysteps
 import (
 	"errors"
 	"fmt"
-	"github.com/Yandex-Practicum/tracker/internal/personaldata"
-	"github.com/Yandex-Practicum/tracker/internal/spentenergy"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/Yandex-Practicum/tracker/internal/personaldata"
+	"github.com/Yandex-Practicum/tracker/internal/spentenergy"
 )
 
 type DaySteps struct {
@@ -62,11 +63,10 @@ func (ds DaySteps) ActionInfo() (string, error) {
 		return "", err
 	}
 
-	var result string
-
-	result += fmt.Sprintf("Количество шагов: %d.\n", ds.Steps)
-	result += fmt.Sprintf("Дистанция составила %.2f км.\n", distance)
-	result += fmt.Sprintf("Вы сожгли %.2f ккал.\n", calories)
-
-	return result, nil
+	return fmt.Sprintf(
+			"Количество шагов: %d.\n"+
+				"Дистанция составила %.2f км.\n"+
+				"Вы сожгли %.2f ккал.\n",
+			ds.Steps, distance, calories),
+		nil
 }

@@ -3,11 +3,12 @@ package trainings
 import (
 	"errors"
 	"fmt"
-	"github.com/Yandex-Practicum/tracker/internal/personaldata"
-	"github.com/Yandex-Practicum/tracker/internal/spentenergy"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/Yandex-Practicum/tracker/internal/personaldata"
+	"github.com/Yandex-Practicum/tracker/internal/spentenergy"
 )
 
 type Training struct {
@@ -76,13 +77,17 @@ func (t Training) ActionInfo() (string, error) {
 		return "", err
 	}
 
-	var result string
-
-	result += fmt.Sprintf("Тип тренировки: %s\n", t.TrainingType)
-	result += fmt.Sprintf("Длительность: %.2f ч.\n", t.Duration.Hours())
-	result += fmt.Sprintf("Дистанция: %.2f км.\n", distance)
-	result += fmt.Sprintf("Скорость: %.2f км/ч\n", meanSpeed)
-	result += fmt.Sprintf("Сожгли калорий: %.2f\n", calories)
-
-	return result, nil
+	return fmt.Sprintf(
+			"Тип тренировки: %s\n"+
+				"Длительность: %.2f ч.\n"+
+				"Дистанция: %.2f км.\n"+
+				"Скорость: %.2f км/ч\n"+
+				"Сожгли калорий: %.2f\n",
+			t.TrainingType,
+			t.Duration.Hours(),
+			distance,
+			meanSpeed,
+			calories,
+		),
+		nil
 }
